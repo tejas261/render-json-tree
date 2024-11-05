@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "lib": ["dom", "es2015", "es2015.iterable"]
+  },
+  "include": ["src/**/*"]
+}
