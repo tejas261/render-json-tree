@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && postcss src/styles.css -o dist/styles.css"
   },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
