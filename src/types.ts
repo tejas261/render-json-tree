@@ -11,7 +11,7 @@ export type JsonData = {
   export interface EditableJsonTreeProps {
     data: JsonData;
     width?: string;
-    viewStyle?: string;
+    theme?: string;
     backgroundColor?: string;
     keyTextColor?: string;
     valueTextColor?: string;

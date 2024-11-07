@@ -6,15 +6,15 @@ import { JsonData, EditableJsonTreeProps } from "./types";
 export const JsonTree: React.FC<EditableJsonTreeProps> = ({
   data,
   width,
-  viewStyle = "light",
+  theme = "light",
   backgroundColor,
   keyTextColor,
   valueTextColor,
   fontSize,
   fontStyle,
 }) => {
-  // Apply color scheme based on viewStyle, falling back to specific props if provided
-  const selectedColors = colorSchemes[viewStyle];
+  // Apply color scheme based on theme, falling back to specific props if provided
+  const selectedColors = colorSchemes[theme];
   const appliedBackgroundColor =
     backgroundColor || selectedColors.backgroundColor;
   const appliedKeyTextColor = keyTextColor || selectedColors.keyTextColor;
@@ -154,7 +154,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
                           cursor: "pointer",
                           marginLeft: "4px",
                         }}
-                        color={`${viewStyle == "dark" ? "#fff" : "#000"}`}
+                        color={`${theme == "dark" ? "#fff" : "#000"}`}
                         size={16}
                         onClick={() => {
                           setEditingField(true);
@@ -276,7 +276,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
           style={{ position: "relative", cursor: "pointer" }}
         >
           <Copy
-            color={`${viewStyle == "dark" ? "#fff" : "#000"}`}
+            color={`${theme == "dark" ? "#fff" : "#000"}`}
             size={20}
             onClick={copyToClipboard}
           />
@@ -287,7 +287,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
                 top: "18px",
                 left: "-12px",
                 backgroundColor: "transparent",
-                color: `${viewStyle == "dark" ? "#fff" : "#000"}`,
+                color: `${theme == "dark" ? "#fff" : "#000"}`,
                 padding: "4px 8px",
                 borderRadius: "4px",
                 fontSize: "0.8rem",
