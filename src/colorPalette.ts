@@ -6,7 +6,17 @@ export const colorSchemes = {
     },
     light: {
       backgroundColor: "#fff",
-      keyTextColor: "#333",
-      valueTextColor: "#555",
+      keyTextColor: "#6256CA",
+      valueTextColor: "#6EC207",
+    },
+    beige:{
+      backgroundColor: "#FFF6E9",
+      keyTextColor: "#0766AD",
+      valueTextColor: "#0D9276",
+    },
+    coolBlue:{
+      backgroundColor: "#EFFFFB",
+      keyTextColor: "#272727",
+      valueTextColor: "#F38181",
     },
   };

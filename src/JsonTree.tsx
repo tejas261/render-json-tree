@@ -1,27 +1,7 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronRight, Copy, Plus } from "lucide-react";
 import { colorSchemes } from "./colorPalette";
-
-type JsonData = {
-  [key: string]:
-    | string
-    | number
-    | boolean
-    | JsonData
-    | (string | number)[]
-    | JsonData[];
-};
-
-interface EditableJsonTreeProps {
-  data: JsonData;
-  width: string;
-  viewStyle?: "dark" | "light";
-  backgroundColor?: string;
-  keyTextColor?: string;
-  valueTextColor?: string;
-  fontSize?: string;
-  fontStyle?: string;
-}
+import { JsonData, EditableJsonTreeProps } from "./types";
 
 export const JsonTree: React.FC<EditableJsonTreeProps> = ({
   data,
@@ -39,7 +19,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
     backgroundColor || selectedColors.backgroundColor;
   const appliedKeyTextColor = keyTextColor || selectedColors.keyTextColor;
   const appliedValueTextColor = valueTextColor || selectedColors.valueTextColor;
-
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [jsonData, setJsonData] = useState<JsonData>(data);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [editingValue, setEditingValue] = useState<string>("");
@@ -66,7 +46,21 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
     for (let i = 0; i < keys.length - 1; i++) {
       current = current[keys[i]] as JsonData;
     }
-    current[keys[keys.length - 1]] = editingValue;
+
+    // Get the original value type for the current key
+    const originalValue = current[keys[keys.length - 1]];
+    let newValue: string | number | boolean;
+
+    // Determine the type and parse accordingly
+    if (typeof originalValue === "number") {
+      newValue = Number(editingValue); // Convert to number
+    } else if (typeof originalValue === "boolean") {
+      newValue = editingValue.toLowerCase() === "true"; // Convert to boolean
+    } else {
+      newValue = editingValue; // Keep as string
+    }
+
+    current[keys[keys.length - 1]] = newValue;
 
     setJsonData({ ...jsonData });
     setEditingKey(null);
@@ -183,6 +177,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
                           padding: "4px",
                           borderRadius: "4px",
                           marginRight: "8px",
+                          backgroundColor: "transparent",
                         }}
                       />
                       <input
@@ -195,6 +190,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
                           padding: "4px",
                           borderRadius: "4px",
                           marginRight: "8px",
+                          backgroundColor: "transparent",
                         }}
                         onChange={(e) => setNewValue(e.target.value)}
                         onKeyDown={(e) => {
@@ -219,10 +215,13 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
                       type="text"
                       value={editingValue}
                       onChange={handleChange}
+                      className={`${fontStyle || "fira-code"}`}
                       style={{
                         border: "none",
                         outline: "none",
                         overflow: "scroll",
+                        color: appliedValueTextColor,
+                        backgroundColor: "transparent",
                       }}
                       onBlur={() => handleBlur(fullKey)}
                       autoFocus
@@ -249,17 +248,21 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
 
   return (
     <div
-      className={`${fontStyle || "source-code-pro"}`}
+      className={`${fontStyle || "fira-code"}`}
       style={{
         padding: "1rem",
         backgroundColor: appliedBackgroundColor,
-        width: width,
+        width: width || "100%",
         margin: "5px",
-        borderRadius: "8px",
-        border: "1px solid grey",
+        borderRadius: "16px",
+        border: "1px solid #A6AEBF",
+        boxShadow: "#454545",
+        maxWidth: "25rem",
+        minWidth: "15rem",
+        maxHeight: "20rem",
+        overflow: "auto",
       }}
     >
-      {/* Copy icon at the top of the JSON tree */}
       <div
         style={{
           display: "flex",
@@ -267,16 +270,35 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
           marginBottom: "4px",
         }}
       >
-        <Copy
-          color={`${viewStyle == "dark" ? "#fff" : "#000"}`}
-          size={20}
-          style={{
-            cursor: "pointer",
-            border: "1px",
-            borderRadius: "2px",
-          }}
-          onClick={copyToClipboard}
-        />
+        <div
+          onMouseEnter={() => setIsTooltipVisible(true)}
+          onMouseLeave={() => setIsTooltipVisible(false)}
+          style={{ position: "relative", cursor: "pointer" }}
+        >
+          <Copy
+            color={`${viewStyle == "dark" ? "#fff" : "#000"}`}
+            size={20}
+            onClick={copyToClipboard}
+          />
+          {isTooltipVisible && (
+            <span
+              style={{
+                position: "absolute",
+                top: "18px",
+                left: "-12px",
+                backgroundColor: "transparent",
+                color: `${viewStyle == "dark" ? "#fff" : "#000"}`,
+                padding: "4px 8px",
+                borderRadius: "4px",
+                fontSize: "0.8rem",
+                whiteSpace: "nowrap",
+                zIndex: 1,
+              }}
+            >
+              Copy
+            </span>
+          )}
+        </div>
       </div>
       {renderTree(jsonData)}
     </div>
