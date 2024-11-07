@@ -20,4 +20,4 @@ npm install render-json-tree
 | Prop         | Type        | Description                                                 |
 |--------------|-------------|-------------------------------------------------------------|
 | `data`       | `object`    | The JSON data to display.                                   |
-| `theme`      | `string`    | The style of the view (e.g., `light` or `dark`).            |
+| `theme?`      | `string`    | The style of the view (e.g., `light` or `dark`).            |
