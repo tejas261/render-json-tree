@@ -1,31 +1,50 @@
 {
+  "description": "A JSON tree component for React",
   "name": "render-json-tree",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc && postcss src/styles/styles.css -o dist/styles.css"
-  },
+  "version": "1.0.1",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "type": "module",
   "types": "dist/index.d.ts",
+  "style": "dist/styles.css",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts",
+      "style": "./dist/styles.css"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
   "files": [
-    "dist",
-    "index.d.ts"
+    "dist"
   ],
+  "scripts": {
+    "build": "rollup -c rollup.config.cjs && postcss src/styles/styles.css -o dist/styles.css"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
     "lucide-react": "^0.454.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tailwindcss": "^3.4.14"
+    "react-hot-toast": "^2.4.1",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-typescript": "^12.1.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "postcss-cli": "^11.0.0",
+    "rollup": "^4.25.0",
+    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

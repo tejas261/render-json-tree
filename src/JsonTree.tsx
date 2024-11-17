@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { ChevronDown, ChevronRight, Copy, Plus } from "lucide-react";
 import { colorSchemes } from "./colorPalette";
 import { JsonData, EditableJsonTreeProps } from "./types";
+import "./styles/styles.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export const JsonTree: React.FC<EditableJsonTreeProps> = ({
   data,
   width,
+  height,
   theme = "light",
   backgroundColor,
   keyTextColor,
   valueTextColor,
   fontSize,
   fontStyle,
+  onSave,
 }) => {
   // Apply color scheme based on theme, falling back to specific props if provided
   const selectedColors = colorSchemes[theme];
@@ -63,6 +67,10 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
     current[keys[keys.length - 1]] = newValue;
 
     setJsonData({ ...jsonData });
+    if (onSave) {
+      onSave({ ...jsonData });
+      toast("Your JSON was edited");
+    }
     setEditingKey(null);
     setEditingValue("");
   };
@@ -96,6 +104,10 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
     }
 
     setJsonData({ ...jsonData });
+    if (onSave) {
+      onSave({ ...jsonData });
+      toast("Your JSON was edited");
+    }
     setNewKey("");
     setNewValue("");
     setHoveredKey(null);
@@ -221,10 +233,14 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
                         outline: "none",
                         overflow: "scroll",
                         color: appliedValueTextColor,
+                        fontSize: fontSize || "1rem",
                         backgroundColor: "transparent",
                       }}
                       onBlur={() => handleBlur(fullKey)}
                       autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key == "Enter") handleBlur(fullKey);
+                      }}
                     />
                   ) : (
                     <span
@@ -253,13 +269,14 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
         padding: "1rem",
         backgroundColor: appliedBackgroundColor,
         width: width || "100%",
+        height: height || "100%",
         margin: "5px",
         borderRadius: "16px",
         border: "1px solid #A6AEBF",
         boxShadow: "#454545",
-        maxWidth: "25rem",
+        maxWidth: width || "25rem",
         minWidth: "15rem",
-        maxHeight: "20rem",
+        maxHeight: height || "20rem",
         overflow: "auto",
       }}
     >
@@ -299,6 +316,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
             </span>
           )}
         </div>
+        <Toaster />
       </div>
       {renderTree(jsonData)}
     </div>

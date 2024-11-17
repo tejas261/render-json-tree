@@ -1,22 +1,22 @@
-export const colorSchemes = {
-    dark: {
-      backgroundColor: "#000",
-      keyTextColor: "#00d084",
-      valueTextColor: "#ff6900",
-    },
-    light: {
-      backgroundColor: "#fff",
-      keyTextColor: "#6256CA",
-      valueTextColor: "#6EC207",
-    },
-    beige:{
-      backgroundColor: "#FFF6E9",
-      keyTextColor: "#0766AD",
-      valueTextColor: "#0D9276",
-    },
-    coolBlue:{
-      backgroundColor: "#EFFFFB",
-      keyTextColor: "#272727",
-      valueTextColor: "#F38181",
-    },
-  };
+export const colorSchemes: any = {
+  dark: {
+    backgroundColor: "#000",
+    keyTextColor: "#fff",
+    valueTextColor: "#ccc",
+  },
+  light: {
+    backgroundColor: "#fff",
+    keyTextColor: "#000",
+    valueTextColor: "#333",
+  },
+  beige: {
+    backgroundColor: "#f5f5dc",
+    keyTextColor: "#000",
+    valueTextColor: "#333",
+  },
+  coolBlue: {
+    backgroundColor: "#00f",
+    keyTextColor: "#fff",
+    valueTextColor: "#ccc",
+  },
+};
