@@ -1817,6 +1817,7 @@ var JsonTree = function (_a) {
             .writeText(contentToCopy)
             .then(function () { return console.log("Content copied to clipboard"); })
             .catch(function (err) { return console.error("Failed to copy: ", err); });
+        _t("Copied the JSON to clipboard");
     };
     var handleAddNewField = function (parentKey) {
         var keys = parentKey.split(".");

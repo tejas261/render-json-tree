@@ -88,6 +88,7 @@ export const JsonTree: React.FC<EditableJsonTreeProps> = ({
       .writeText(contentToCopy)
       .then(() => console.log("Content copied to clipboard"))
       .catch((err) => console.error("Failed to copy: ", err));
+    toast("Copied the JSON to clipboard");
   };
 
   const handleAddNewField = (parentKey: string) => {
