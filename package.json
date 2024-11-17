@@ -1,7 +1,7 @@
 {
   "description": "A JSON tree component for React",
   "name": "render-json-tree",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "type": "module",

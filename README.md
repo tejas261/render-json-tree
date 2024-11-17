@@ -14,7 +14,7 @@ A flexible JSON tree component built with TypeScript for visualizing, editing, a
 
 Install the `render-json-tree` package via npm:
 
-```
+``` bash
 npm install render-json-tree
 ```
 
