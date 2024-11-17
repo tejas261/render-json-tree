@@ -38,100 +38,25 @@ import { JsonTree } from "render-json-tree";
 import "render-json-tree/styles.css";
 
 function App() {
-  const jsonData = const json = [
-  {
-    organization: {
-      name: "Tech Innovations Inc.",
-      location: "Silicon Valley",
-      departments: [
-        {
-          name: "Engineering",
-          teams: [
-            {
-              name: "Backend Development",
-              employees: [
-                {
-                  id: 1,
-                  name: "Alice",
-                  role: "Senior Developer",
-                  projects: [
-                    {
-                      id: 101,
-                      title: "API Development",
-                      tasks: [
-                        {
-                          id: 1001,
-                          description: "Design API architecture",
-                          status: "Completed",
-                        },
-                        {
-                          id: 1002,
-                          description: "Implement authentication",
-                          status: "In Progress",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                {
-                  id: 2,
-                  name: "Bob",
-                  role: "Junior Developer",
-                  projects: [
-                    {
-                      id: 102,
-                      title: "Database Optimization",
-                      tasks: [
-                        {
-                          id: 2001,
-                          description: "Analyze query performance",
-                          status: "Pending",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
+  const jsonData =[
+    {
+      id: 1,
+      name: "John Doe",
+      address: {
+        street: "123 Main St",
+        city: "Anytown",
+        state: {
+          name: "California",
+          code: "CA",
+          region: {
+            name: "West Coast",
+            population: 10000000,
+          },
         },
-        {
-          name: "Marketing",
-          teams: [
-            {
-              name: "Digital Marketing",
-              employees: [
-                {
-                  id: 3,
-                  name: "Charlie",
-                  role: "Marketing Specialist",
-                  projects: [
-                    {
-                      id: 201,
-                      title: "Social Media Campaign",
-                      tasks: [
-                        {
-                          id: 3001,
-                          description: "Create content calendar",
-                          status: "Completed",
-                        },
-                        {
-                          id: 3002,
-                          description: "Launch campaign",
-                          status: "In Progress",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      },
+      hobbies: ["reading", "hiking", "coding"],
     },
-  },
-];
+  ];
 
   return (
       <JsonTree
